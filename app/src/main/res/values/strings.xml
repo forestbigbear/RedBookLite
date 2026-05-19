@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">RedBookLite</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_market">市集</string>
+    <string name="tab_message">消息</string>
+    <string name="tab_me">我</string>
+
+    <string name="developing_toast">功能正在开发中，敬请期待</string>
+
+    <string name="feed_title">发现</string>
+    <string name="profile_title">我的笔记</string>
+    <string name="publish_title">发布笔记</string>
+    <string name="detail_title">笔记详情</string>
+
+    <string name="select_cover">选择封面图</string>
+    <string name="hint_title">填写标题</string>
+    <string name="hint_content">分享你的生活…</string>
+    <string name="btn_publish">发布</string>
+
+    <string name="empty_feed">还没有笔记，快去发布吧</string>
+    <string name="empty_profile">你还没有发布笔记</string>
+
+    <string name="publish_success">发布成功</string>
+    <string name="publish_need_cover">请先选择封面图</string>
+    <string name="publish_need_title">请填写标题</string>
+
+    <string name="like_format">%1$d</string>
+    <string name="author_me">我</string>
+    <string name="author_avatar">作者头像</string>
+</resources>
