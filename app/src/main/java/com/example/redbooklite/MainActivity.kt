@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import com.example.redbooklite.ui.feed.FeedFragment
-import com.example.redbooklite.ui.profile.ProfileFragment
-import com.example.redbooklite.ui.publish.PublishActivity
+//import com.example.redbooklite.ui.profile.ProfileFragment
+//import com.example.redbooklite.ui.publish.PublishActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,14 +22,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTabMe: TextView
 
     private val feedFragment = FeedFragment()
-    private val profileFragment = ProfileFragment()
+//    private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         WindowCompat.setDecorFitsSystemWindows(window, true)
-
         setContentView(R.layout.activity_main)
+
+        findViewById<android.view.View>(R.id.bottomNav)?.apply {
+            elevation = 0f
+            translationZ = 0f
+        }
 
         tvPageTitle = findViewById(R.id.tvPageTitle)
         tvTabHome = findViewById(R.id.tvTabHome)
@@ -41,23 +44,19 @@ class MainActivity : AppCompatActivity() {
             showFragment(feedFragment, getString(R.string.feed_title))
             updateTabStyle(Tab.HOME)
         }
-
         tvTabMarket.setOnClickListener {
             showDevelopingToast()
         }
-
-        findViewById<android.view.View>(R.id.tabPublish).setOnClickListener {
-            startActivity(Intent(this, PublishActivity::class.java))
-        }
-
+//        findViewById<android.view.View>(R.id.tabPublish).setOnClickListener {
+//            startActivity(Intent(this, PublishActivity::class.java))
+//        }
         findViewById<android.view.View>(R.id.tabMessage).setOnClickListener {
             showDevelopingToast()
         }
-
-        tvTabMe.setOnClickListener {
-            showFragment(profileFragment, getString(R.string.profile_title))
-            updateTabStyle(Tab.ME)
-        }
+//        tvTabMe.setOnClickListener {
+//            showFragment(profileFragment, getString(R.string.profile_title))
+//            updateTabStyle(Tab.ME)
+//        }
 
         if (savedInstanceState == null) {
             showFragment(feedFragment, getString(R.string.feed_title))
@@ -67,15 +66,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun showFragment(fragment: Fragment, title: String) {
         tvPageTitle.text = title
-
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
 
     private enum class Tab {
-        HOME,
-        ME
+        HOME, ME
     }
 
     private fun updateTabStyle(selected: Tab) {

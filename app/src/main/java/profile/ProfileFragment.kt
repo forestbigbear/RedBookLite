@@ -1,4 +1,4 @@
-package com.example.redbooklite.ui.feed
+package com.example.redbooklite.ui.profile
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.redbooklite.R
 import com.example.redbooklite.RedBookApp
 import com.example.redbooklite.model.Note
+import com.example.redbooklite.ui.feed.NoteAdapter
 import com.example.redbooklite.ui.detail.NoteDetailActivity
 
-class FeedFragment : Fragment(), NoteAdapter.OnNoteClickListener {
+class ProfileFragment : Fragment(), NoteAdapter.OnNoteClickListener {
 
-    private lateinit var viewModel: FeedViewModel
+    private lateinit var viewModel: ProfileViewModel
     private lateinit var adapter: NoteAdapter
-    private lateinit var rvFeed: RecyclerView
+    private lateinit var rvProfile: RecyclerView
     private lateinit var tvEmpty: TextView
 
     override fun onCreateView(
@@ -27,32 +28,32 @@ class FeedFragment : Fragment(), NoteAdapter.OnNoteClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_feed, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvFeed = view.findViewById(R.id.rvFeed)
+        rvProfile = view.findViewById(R.id.rvProfile)
         tvEmpty = view.findViewById(R.id.tvEmpty)
 
         val app = requireActivity().application as RedBookApp
         viewModel = ViewModelProvider(
             this,
-            FeedViewModelFactory(app.repository)
-        )[FeedViewModel::class.java]
+            ProfileViewModelFactory(app.repository)
+        )[ProfileViewModel::class.java]
 
         adapter = NoteAdapter(this)
 
         val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         layoutManager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-        rvFeed.layoutManager = layoutManager
-        rvFeed.adapter = adapter
-        rvFeed.setHasFixedSize(false)
+        rvProfile.layoutManager = layoutManager
+        rvProfile.adapter = adapter
+        rvProfile.setHasFixedSize(false)
 
         viewModel.notes.observe(viewLifecycleOwner) { notes ->
             adapter.submitList(notes)
             tvEmpty.visibility = if (notes.isEmpty()) View.VISIBLE else View.GONE
-            rvFeed.visibility = if (notes.isEmpty()) View.GONE else View.VISIBLE
+            rvProfile.visibility = if (notes.isEmpty()) View.GONE else View.VISIBLE
         }
     }
 

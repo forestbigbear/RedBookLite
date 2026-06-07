@@ -5,7 +5,7 @@
     android:background="@color/page_background">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFeed"
+        android:id="@+id/rvProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -16,9 +16,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/empty_feed"
+        android:text="@string/empty_profile"
         android:textColor="@color/text_secondary"
         android:textSize="14sp"
         android:visibility="gone" />
-
 </FrameLayout>

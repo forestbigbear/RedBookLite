@@ -3,8 +3,19 @@ package com.example.redbooklite.util
 import com.example.redbooklite.R
 
 object AvatarHelper {
-    fun getAvatarResId(id: Long): Int {
-        // 根据 id 返回默认头像，这里统一返回一个占位
-        return R.drawable.bg_avatar_circle
+
+    private val avatarResIds = intArrayOf(
+        R.drawable.seed_avatar_1,
+        R.drawable.seed_avatar_2,
+        R.drawable.seed_avatar_3,
+        R.drawable.seed_avatar_4,
+        R.drawable.seed_avatar_5,
+        R.drawable.seed_avatar_6
+    )
+
+    /** 按笔记 id 稳定映射到 6 张头像之一 */
+    fun getAvatarResId(noteId: Long): Int {
+        val index = (noteId % avatarResIds.size).toInt()
+        return avatarResIds[index]
     }
 }
