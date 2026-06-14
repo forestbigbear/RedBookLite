@@ -9,6 +9,10 @@ object ImageLoader {
         if (coverPath.startsWith("drawable://")) {
             val resId = coverPath.removePrefix("drawable://").toInt()
             imageView.setImageResource(resId)
+        } else if (coverPath.startsWith("http://") || coverPath.startsWith("https://")) {
+            imageView.load(coverPath) {
+                crossfade(true)
+            }
         } else {
             imageView.load(File(coverPath)) {
                 crossfade(true)

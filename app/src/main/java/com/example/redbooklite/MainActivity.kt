@@ -10,8 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import com.example.redbooklite.ui.feed.FeedFragment
-//import com.example.redbooklite.ui.profile.ProfileFragment
-//import com.example.redbooklite.ui.publish.PublishActivity
+import com.example.redbooklite.ui.profile.ProfileFragment
+import com.example.redbooklite.ui.publish.PublishActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTabMe: TextView
 
     private val feedFragment = FeedFragment()
-//    private val profileFragment = ProfileFragment()
+    private val profileFragment = ProfileFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,16 +47,16 @@ class MainActivity : AppCompatActivity() {
         tvTabMarket.setOnClickListener {
             showDevelopingToast()
         }
-//        findViewById<android.view.View>(R.id.tabPublish).setOnClickListener {
-//            startActivity(Intent(this, PublishActivity::class.java))
-//        }
+        findViewById<android.view.View>(R.id.tabPublish).setOnClickListener {
+            startActivity(Intent(this, PublishActivity::class.java))
+        }
         findViewById<android.view.View>(R.id.tabMessage).setOnClickListener {
             showDevelopingToast()
         }
-//        tvTabMe.setOnClickListener {
-//            showFragment(profileFragment, getString(R.string.profile_title))
-//            updateTabStyle(Tab.ME)
-//        }
+        tvTabMe.setOnClickListener {
+            showFragment(profileFragment, getString(R.string.profile_title))
+            updateTabStyle(Tab.ME)
+        }
 
         if (savedInstanceState == null) {
             showFragment(feedFragment, getString(R.string.feed_title))

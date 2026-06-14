@@ -9,5 +9,8 @@ data class Note(
     val authorName: String,
     val likeCount: Int,
     val isMine: Boolean,
-    val createdAt: Long
+    val createdAt: Long,
+    val category: String = "",
+    val authorAvatarUrl: String = "",
+    val authorId: String = ""
 )

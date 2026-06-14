@@ -17,9 +17,10 @@ class NoteAdapter(
     private val listener: OnNoteClickListener
 ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
-    /** 卡片点击回调，写法类似 Java 的 OnClickListener */
     interface OnNoteClickListener {
         fun onNoteClick(note: Note)
+
+        fun onAuthorClick(note: Note)
     }
 
     private val items = ArrayList<Note>()
@@ -58,13 +59,24 @@ class NoteAdapter(
             CoverLayoutHelper.applyStaggeredCoverHeight(ivCover, note.coverAspectRatio)
             ImageLoader.loadCover(ivCover, note.coverPath)
 
-            ivAvatar.setImageResource(AvatarHelper.getAvatarResId(note.id))
+            if (note.authorAvatarUrl.isNotBlank()) {
+                ImageLoader.loadCover(ivAvatar, note.authorAvatarUrl)
+            } else {
+                ivAvatar.setImageResource(AvatarHelper.getAvatarResId(note.id))
+            }
 
             tvTitle.text = note.title
             tvAuthor.text = note.authorName
             tvLikeCount.text = note.likeCount.toString()
+
             itemView.setOnClickListener {
                 listener.onNoteClick(note)
+            }
+            ivAvatar.setOnClickListener {
+                listener.onAuthorClick(note)
+            }
+            tvAuthor.setOnClickListener {
+                listener.onAuthorClick(note)
             }
         }
     }

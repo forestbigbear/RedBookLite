@@ -12,18 +12,28 @@
     <string name="profile_title">我的笔记</string>
     <string name="publish_title">发布笔记</string>
     <string name="detail_title">笔记详情</string>
+    <string name="author_profile_title">作者主页</string>
 
     <string name="select_cover">选择封面图</string>
     <string name="hint_title">填写标题</string>
-    <string name="hint_content">分享你的生活…</string>
+    <string name="hint_content">分享你的生活...</string>
     <string name="btn_publish">发布</string>
 
-    <string name="empty_feed">还没有笔记，快去发布吧</string>
+    <string name="empty_feed">没有找到笔记</string>
     <string name="empty_profile">你还没有发布笔记</string>
+    <string name="empty_author">这个作者还没有笔记</string>
+    <string name="feed_loading">加载中...</string>
+    <string name="feed_retry">重试</string>
+    <string name="feed_search_hint">搜索标题</string>
+    <string name="category_all">全部</string>
+    <string name="category_travel">travel</string>
+    <string name="category_food">food</string>
+    <string name="category_fashion">fashion</string>
 
     <string name="publish_success">发布成功</string>
     <string name="publish_need_cover">请先选择封面图</string>
     <string name="publish_need_title">请填写标题</string>
+    <string name="publish_need_content">请填写正文</string>
 
     <string name="like_format">%1$d</string>
     <string name="author_me">我</string>

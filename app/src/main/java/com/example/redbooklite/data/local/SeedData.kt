@@ -33,9 +33,23 @@ object SeedData {
                 authorName = draft.authorName,
                 likeCount = draft.likeCount,
                 isMine = false,
-                createdAt = now - 1000 * 60 * draft.minutesAgo
+                createdAt = now - 1000 * 60 * draft.minutesAgo,
+                category = categoryForIndex(index),
+                authorId = authorIdForName(draft.authorName)
             )
         }
+    }
+
+    private fun categoryForIndex(index: Int): String {
+        return when {
+            index < 6 -> "travel"
+            index < 12 -> "food"
+            else -> "fashion"
+        }
+    }
+
+    private fun authorIdForName(authorName: String): String {
+        return "seed_author_$authorName"
     }
 
     private fun drafts(): List<SeedDraft> {

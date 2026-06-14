@@ -10,18 +10,18 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import com.example.redbooklite.R
 import com.example.redbooklite.RedBookApp
 import com.example.redbooklite.util.FileHelper
 import com.example.redbooklite.util.ImageLoader
 import com.example.redbooklite.util.ImageSizeHelper
-import kotlinx.coroutines.launch
 
 class PublishActivity : AppCompatActivity() {
 
     private var coverPath: String? = null
     private var coverAspectRatio: Float = 0.85f
+    private lateinit var viewModel: PublishViewModel
 
     private lateinit var ivCoverPreview: ImageView
     private lateinit var etTitle: EditText
@@ -53,6 +53,11 @@ class PublishActivity : AppCompatActivity() {
         etContent = findViewById(R.id.etContent)
         val btnSelectCover: Button = findViewById(R.id.btnSelectCover)
         val btnPublish: Button = findViewById(R.id.btnPublish)
+        val repository = (application as RedBookApp).repository
+        viewModel = ViewModelProvider(
+            this,
+            PublishViewModelFactory(repository)
+        )[PublishViewModel::class.java]
 
         findViewById<View>(R.id.btnBack).setOnClickListener { finish() }
 
@@ -63,28 +68,26 @@ class PublishActivity : AppCompatActivity() {
         btnPublish.setOnClickListener {
             publishNote()
         }
+
+        viewModel.publishResult.observe(this) { result ->
+            when (result) {
+                is PublishResult.Error -> {
+                    Toast.makeText(this, result.messageResId, Toast.LENGTH_SHORT).show()
+                }
+                PublishResult.Success -> {
+                    Toast.makeText(this, R.string.publish_success, Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        }
     }
 
     private fun publishNote() {
-        val path = coverPath
-        if (path == null) {
-            Toast.makeText(this, R.string.publish_need_cover, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val title = etTitle.text.toString().trim()
-        if (title.isEmpty()) {
-            Toast.makeText(this, R.string.publish_need_title, Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        val content = etContent.text.toString().trim()
-        val repository = (application as RedBookApp).repository
-
-        lifecycleScope.launch {
-            repository.publishNote(title, content, path, coverAspectRatio)
-            Toast.makeText(this@PublishActivity, R.string.publish_success, Toast.LENGTH_SHORT).show()
-            finish()
-        }
+        viewModel.publishNote(
+            title = etTitle.text.toString(),
+            content = etContent.text.toString(),
+            coverPath = coverPath,
+            coverAspectRatio = coverAspectRatio
+        )
     }
 }

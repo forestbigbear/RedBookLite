@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.redbooklite.R
 import com.example.redbooklite.RedBookApp
 import com.example.redbooklite.model.Note
+import com.example.redbooklite.ui.author.AuthorProfileActivity
 import com.example.redbooklite.ui.feed.NoteAdapter
 import com.example.redbooklite.ui.detail.NoteDetailActivity
 
@@ -60,6 +61,14 @@ class ProfileFragment : Fragment(), NoteAdapter.OnNoteClickListener {
     override fun onNoteClick(note: Note) {
         val intent = Intent(requireContext(), NoteDetailActivity::class.java)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE_ID, note.id)
+        startActivity(intent)
+    }
+
+    override fun onAuthorClick(note: Note) {
+        val intent = Intent(requireContext(), AuthorProfileActivity::class.java)
+        intent.putExtra(AuthorProfileActivity.EXTRA_AUTHOR_ID, note.authorId)
+        intent.putExtra(AuthorProfileActivity.EXTRA_AUTHOR_NAME, note.authorName)
+        intent.putExtra(AuthorProfileActivity.EXTRA_AUTHOR_AVATAR_URL, note.authorAvatarUrl)
         startActivity(intent)
     }
 }

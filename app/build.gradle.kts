@@ -53,6 +53,9 @@ dependencies {
 
     implementation(libs.gson)
     implementation(libs.coil)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.androidx.swiperefreshlayout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
